@@ -204,6 +204,59 @@ export const useUserStore = create((set, get) => ({
   }
 },
 
+ verifyEmail: async ({ email, otp }) => {
+    set({ loading: true });
+
+    try {
+      const res = await axios.post("/auth/verify-email", { email, otp });
+      set({ user: res.data.user, loading: false });
+      toast.success(res.data.message || "Email verified");
+    } catch (error) {
+      set({ loading: false });
+      toast.error(error.response?.data?.message || "Invalid OTP");
+      throw error;
+    }
+  },
+
+  // -------------------- FORGOT PASSWORD: REQUEST OTP --------------------
+    requestPasswordOTP: async (email) => {
+      set({ loading: true });
+  
+      try {
+        await axios.post("/auth/request-otp", { email });
+        set({ loading: false });
+        toast.success("Password reset OTP sent to your email");
+      } catch (error) {
+        set({ loading: false });
+        toast.error(
+          error.response?.data?.message || "Failed to send reset OTP"
+        );
+        throw error;
+      }
+    },
+  
+    // -------------------- FORGOT PASSWORD: RESET WITH OTP --------------------
+    resetPasswordWithOTP: async ({ email, otp, newPassword }) => {
+      set({ loading: true });
+  
+      try {
+        const res = await axios.post("/auth/reset-password", {
+          email,
+          otp,
+          newPassword,
+        });
+  
+        set({ loading: false });
+        toast.success(
+          res.data?.message || "Password reset successful. Please log in."
+        );
+      } catch (error) {
+        set({ loading: false });
+        toast.error(error.response?.data?.message || "Failed to reset password");
+        throw error;
+      }
+    },
+
 }));
 
 // ===== Axios interceptor (same file or separate, your choice) =====

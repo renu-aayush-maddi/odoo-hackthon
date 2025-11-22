@@ -114,6 +114,9 @@ import InternalTransfersListPage from "./pages/InternalTransfersListPage";
 import NewInternalTransferPage from "./pages/NewInternalTransferPage";
 import InternalTransferDetailPage from "./pages/InternalTransferDetailPage";
 
+// import AdjustmentsListPage from "./pages/AdjustmentsListPage";
+// import NewAdjustmentPage from "./pages/NewAdjustmentPage";
+
 // (later) Products, Warehouses, MoveHistory, Settings pages
 
 function App() {
@@ -183,6 +186,31 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+  path="/settings"
+  element={
+    <ProtectedRoute>
+      <SettingsPage />
+    </ProtectedRoute>
+  }
+/>
+{/* 
+<Route
+  path="/operations/adjustments"
+  element={
+    <ProtectedRoute>
+      <AdjustmentsListPage />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/operations/adjustments/new"
+  element={
+    <ProtectedRoute>
+      <NewAdjustmentPage />
+    </ProtectedRoute>
+  }
+/> */}
 
           <Route
             path="stock"

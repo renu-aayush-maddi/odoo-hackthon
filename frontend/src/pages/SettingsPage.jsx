@@ -69,12 +69,12 @@ const SettingsPage = () => {
       </form>
 
       {/* Logout */}
-      <button
+      {/* <button
         onClick={logout}
         className="px-6 py-2 mt-4 rounded-full bg-red-500 text-black text-sm font-semibold hover:bg-red-400"
       >
         Logout
-      </button>
+      </button> */}
     </div>
   );
 };
