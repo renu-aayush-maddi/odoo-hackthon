@@ -100,6 +100,14 @@ import DashboardPage from "./pages/DashboardPage";
 import StockPage from "./pages/StockPage";
 import ReceiptsListPage from "./pages/ReceiptsListPage";
 import ReceiptDetailPage from "./pages/ReceiptDetailPage";
+import ProductsPage from "./pages/ProductsPage";
+import ReceiptCreatePage from "./pages/ReceiptCreatePage";
+import NewReceiptPage from "./pages/NewReceiptPage";
+import DeliveriesListPage from "./pages/DeliveriesListPage";
+
+import NewDeliveryPage from "./pages/NewDeliveryPage";
+
+
 // (later) Products, Warehouses, MoveHistory, Settings pages
 
 function App() {
@@ -180,6 +188,47 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          <Route
+  path="/products"
+  element={
+    <ProtectedRoute roles={["admin", "inventory_manager"]}>
+      <ProductsPage />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/operations/receipts/new"
+  element={
+    <ProtectedRoute allowedRoles={["admin", "inventory_manager"]}>
+      <ReceiptCreatePage />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/operations/receipts/new"
+  element={
+    user && (user.role === "admin" || user.role === "inventory_manager")
+      ? <NewReceiptPage />
+      : <Navigate to="/" />
+  }
+/>
+
+<Route
+  path="/operations/deliveries"
+  element={
+    user ? <DeliveriesListPage /> : <Navigate to="/login" />
+  }
+/>
+
+<Route path="/operations/deliveries/new" element={<NewDeliveryPage />} />
+{/* <Route path="/operations/deliveries/:id" element={<DeliveryDetailPage />} /> */}
+
+
+
+
 
           {/* TODO: products, move-history, settings pages */}
         </Route>

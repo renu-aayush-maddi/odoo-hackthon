@@ -1,29 +1,43 @@
+// src/pages/ReceiptsListPage.jsx
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useOperationStore } from "../stores/useOperationStore";
 
 const ReceiptsListPage = () => {
+  const navigate = useNavigate();
+
+  // from your existing store
   const { fetchOperations, operations, loading } = useOperationStore();
 
   useEffect(() => {
+    // load all receipt-type operations
     fetchOperations("receipt");
   }, [fetchOperations]);
 
   return (
-    <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold text-pink-300">Receipts</h1>
+    <div className="p-8 space-y-4">
+      {/* Header row */}
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-2xl font-semibold text-pink-200">Receipts</h1>
 
-        <Link
-          to="/operations/receipts/new"
-          className="px-3 py-1 rounded bg-pink-500 text-sm hover:bg-pink-600"
-        >
-          New Receipt
-        </Link>
+        <div className="flex gap-3">
+          <button
+            onClick={() => navigate("/operations/deliveries")}
+            className="px-4 py-2 rounded-full border border-pink-500/70 text-xs font-medium text-pink-200 hover:bg-pink-500/10"
+          >
+            Go to Deliveries
+          </button>
+
+          <button
+            onClick={() => navigate("/operations/receipts/new")}
+            className="px-4 py-2 rounded-full bg-pink-500 text-xs font-semibold text-black hover:bg-pink-400"
+          >
+            New Receipt
+          </button>
+        </div>
       </div>
 
-      {loading && <p className="text-sm text-slate-400">Loading...</p>}
-
+      {/* Table */}
       <div className="border border-pink-400/40 rounded-xl overflow-hidden">
         <table className="w-full text-sm">
           <thead className="bg-slate-900/80 border-b border-pink-400/40">
@@ -59,6 +73,7 @@ const ReceiptsListPage = () => {
                 <td className="px-3 py-2 capitalize">{op.status}</td>
               </tr>
             ))}
+
             {!operations.length && !loading && (
               <tr>
                 <td
@@ -72,6 +87,10 @@ const ReceiptsListPage = () => {
           </tbody>
         </table>
       </div>
+
+      {loading && (
+        <p className="text-sm text-slate-400 mt-2">Loading receipts…</p>
+      )}
     </div>
   );
 };

@@ -117,6 +117,8 @@ import warehouseRoutes from "./routes/warehouse.route.js";
 import productRoutes from "./routes/product.route.js";
 import stockRoutes from "./routes/stock.route.js";
 import operationRoutes from "./routes/operation.route.js";
+import dashboardRoutes from "./routes/dashboard.route.js";
+
 
 dotenv.config();
 
@@ -134,6 +136,8 @@ app.use("/api/warehouses", warehouseRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/stock", stockRoutes);
 app.use("/api/operations", operationRoutes);
+app.use("/api/dashboard", dashboardRoutes);
+
 
 // (optional) for production build of React
 if (process.env.NODE_ENV === "production") {
