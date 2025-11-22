@@ -1,11 +1,11 @@
 import express from "express";
 import {
-  createProduct,
-  getProducts,
-  getProductById,
-  updateProduct,
-  deleteProduct,
-} from "../controllers/product.controller.js";
+  createWarehouse,
+  getWarehouses,
+  getWarehouseById,
+  updateWarehouse,
+  deleteWarehouse,
+} from "../controllers/warehouse.controller.js";
 import { protectRoute, authorizeRoles } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
@@ -15,15 +15,15 @@ router.use(protectRoute);
 router.post(
   "/",
   authorizeRoles("admin", "inventory_manager"),
-  createProduct
+  createWarehouse
 );
-router.get("/", getProducts);
-router.get("/:id", getProductById);
+router.get("/", getWarehouses);
+router.get("/:id", getWarehouseById);
 router.put(
   "/:id",
   authorizeRoles("admin", "inventory_manager"),
-  updateProduct
+  updateWarehouse
 );
-router.delete("/:id", authorizeRoles("admin"), deleteProduct);
+router.delete("/:id", authorizeRoles("admin"), deleteWarehouse);
 
 export default router;
