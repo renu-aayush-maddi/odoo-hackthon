@@ -113,6 +113,8 @@ import MoveHistoryPage from "./pages/MoveHistoryPage";
 import InternalTransfersListPage from "./pages/InternalTransfersListPage";
 import NewInternalTransferPage from "./pages/NewInternalTransferPage";
 import InternalTransferDetailPage from "./pages/InternalTransferDetailPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+
 
 // import AdjustmentsListPage from "./pages/AdjustmentsListPage";
 // import NewAdjustmentPage from "./pages/NewAdjustmentPage";
@@ -135,6 +137,11 @@ function App() {
         <Route
           path="/login"
           element={!user ? <LoginPage /> : <Navigate to="/dashboard" />}
+        />
+        
+                  <Route
+          path="/forgot-password"
+          element={!user ? <ForgotPasswordPage /> : <Navigate to="/dashboard" />}
         />
         <Route
           path="/signup"
@@ -223,6 +230,8 @@ function App() {
             }
           />
 
+
+
           <Route
   path="/products"
   element={
@@ -240,6 +249,17 @@ function App() {
     </ProtectedRoute>
   }
 />
+
+<Route
+  path="/operations/receipts/new"
+  element={
+    <ProtectedRoute allowedRoles={["admin", "inventory_manager"]}>
+      <ReceiptCreatePage />
+    </ProtectedRoute>
+  }
+/>
+
+
 
 <Route
   path="/operations/receipts/new"
