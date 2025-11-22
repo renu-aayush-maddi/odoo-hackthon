@@ -192,6 +192,18 @@ export const useUserStore = create((set, get) => ({
       throw error;
     }
   },
+  updateProfile: async (payload) => {
+  set({ loading: true });
+  try {
+    const res = await axios.put("/auth/profile", payload);
+    set({ user: res.data.user, loading: false });
+    toast.success("Profile updated!");
+  } catch (error) {
+    set({ loading: false });
+    toast.error(error.response?.data?.message || "Update failed");
+  }
+},
+
 }));
 
 // ===== Axios interceptor (same file or separate, your choice) =====
@@ -223,3 +235,6 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+
+

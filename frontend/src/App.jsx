@@ -104,9 +104,15 @@ import ProductsPage from "./pages/ProductsPage";
 import ReceiptCreatePage from "./pages/ReceiptCreatePage";
 import NewReceiptPage from "./pages/NewReceiptPage";
 import DeliveriesListPage from "./pages/DeliveriesListPage";
+import SettingsPage from "./pages/SettingsPage";
 
 import NewDeliveryPage from "./pages/NewDeliveryPage";
 
+import MoveHistoryPage from "./pages/MoveHistoryPage";
+
+import InternalTransfersListPage from "./pages/InternalTransfersListPage";
+import NewInternalTransferPage from "./pages/NewInternalTransferPage";
+import InternalTransferDetailPage from "./pages/InternalTransferDetailPage";
 
 // (later) Products, Warehouses, MoveHistory, Settings pages
 
@@ -227,7 +233,41 @@ function App() {
 {/* <Route path="/operations/deliveries/:id" element={<DeliveryDetailPage />} /> */}
 
 
+<Route
+  path="/move-history"
+  element={
+    <ProtectedRoute allowedRoles={["admin", "inventory_manager", "warehouse_staff"]}>
+      <MoveHistoryPage />
+    </ProtectedRoute>
+  }
+/>
 
+
+
+<Route
+  path="/operations/internal"
+  element={
+    <ProtectedRoute>
+      <InternalTransfersListPage />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/operations/internal/new"
+  element={
+    <ProtectedRoute>
+      <NewInternalTransferPage />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/operations/internal/:id"
+  element={
+    <ProtectedRoute>
+      <InternalTransferDetailPage />
+    </ProtectedRoute>
+  }
+/>
 
 
           {/* TODO: products, move-history, settings pages */}

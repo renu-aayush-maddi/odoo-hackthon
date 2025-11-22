@@ -81,6 +81,8 @@ const AppLayout = () => {
     { to: "/products", label: "Products" },
     { to: "/move-history", label: "Move History" },
     { to: "/settings", label: "Settings" },
+    { to: "/operations/internal", label: "Internal Transfers" },
+    
   ];
 
   return (
